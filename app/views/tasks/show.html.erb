@@ -1,0 +1,14 @@
+<h1><%= @task.name %></h1>
+<hr />
+<br/>
+<p>
+  Should be finished by:
+  <%= @task.finish_by.strftime("%d %B %Y") unless @task.finish_by.nil? %>
+</p>
+<br/>
+<p>
+  Description:
+  <%= simple_format @task.content %>
+</p>
+
+<%= link_to 'Home', tasks_path %>|<%= link_to 'Edit', edit_task_path, :name => "hard_button" %>

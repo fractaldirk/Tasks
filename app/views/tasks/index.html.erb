@@ -1,0 +1,23 @@
+<h1>Check List</h1>
+
+<%= link_to "New Task", new_task_path, id: "new_link", remote: true %>
+
+<h2>Incomplete Tasks</h2>
+<div class="tasks" id="incomplete_tasks">
+  <%= render @incomplete_tasks %>
+</div>
+
+<h2>Complete Tasks</h2>
+<div class="tasks" id="complete_tasks">
+  <%= render @complete_tasks %>
+</div>
+
+<hr />
+
+<% @tasks.each do |task| %>
+<div>
+  <%= link_to task.name, task %>(<%= task.finish_by.strftime("%d %B %Y") %>)<br/>
+  <i>(<%= truncate(task.content, :length => 50, :separator => ' ') %>)</i>
+</div>
+
+<% end %>

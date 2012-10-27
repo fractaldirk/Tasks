@@ -1,0 +1,7 @@
+<h1>Edit that shit</h1>
+<hr />
+
+<%= render 'form' %>
+
+<%= link_to_submit 'Submit' %>
+<%= link_to 'Back', @task %>
