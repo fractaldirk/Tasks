@@ -7,8 +7,11 @@
 </div>
 <hr /><br/>
 
-<%= link_to 'Home', tasks_path %>|
 <%= link_to "New Task", new_task_path, id: "new_link", remote: true %> |
+
+<%= link_to 'Home', tasks_path %> |
+
+<%= link_to 'Complete tasks', tasks_complete_path %>
 
 <% if @incomplete_tasks.present? %>
   <h2>Incomplete Tasks</h2>

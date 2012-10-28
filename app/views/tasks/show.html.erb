@@ -12,4 +12,15 @@
   <%= simple_format @task.content %>
 </p>
 
+<br/>
+
+<i><h2>Comments</h2></i>
+  <%= render @task.comments %>
+
+<br/>
+
+<h2>Add a comment:</h2>
+  <%= render "comments/form" %>
+
+<br/>
 <%= link_to 'Home', tasks_path %>|<%= link_to 'Edit', edit_task_path, :name => "hard_button" %>

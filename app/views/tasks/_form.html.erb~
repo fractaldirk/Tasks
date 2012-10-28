@@ -6,7 +6,7 @@
 
 <div class="field">
   <%= f.label :tag_list, "Tags (separated by commas)" %><br/>
-  <%= f.text_field :tag_list %>
+  <%= f.text_field :tag_list, :id => "task_complete", :placeholder => 'Please use autocomplete, thanks.', data: { autocomplete_source: tasks_autocompletedos_path } %>
 </div>
 
 <div class="field">

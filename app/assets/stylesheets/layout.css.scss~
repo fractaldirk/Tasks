@@ -5,7 +5,7 @@ html, body {
 }
 
 a {
-  color: #000066;
+  color: #990033;
   img { border: none; }
 }
 
