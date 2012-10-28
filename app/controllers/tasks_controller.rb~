@@ -12,10 +12,20 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @task }
+    end
   end
 
   def new
     @task = Task.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @task }
+    end
   end
 
   def create
@@ -64,6 +74,13 @@ class TasksController < ApplicationController
   end
 
   def complete
-    @complete_tasks = Task.where(complete: true)
+    if params[:tag]
+      @tasks = Task.tagged_with(params[:tag])
+    else
+      sleep 1
+      @incomplete_tasks = Task.where(complete: false)
+      @complete_tasks = Task.where(complete: true)
+      @tasks = Task.find(:all, :order => "finish_by")
+    end
   end
 end
