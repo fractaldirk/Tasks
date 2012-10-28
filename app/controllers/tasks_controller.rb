@@ -1,9 +1,13 @@
 class TasksController < ApplicationController
   def index
-    sleep 1
-    @incomplete_tasks = Task.where(complete: false)
-    @complete_tasks = Task.where(complete: true)
-    @tasks = Task.find(:all, :order => "finish_by")
+    if params[:tag]
+      @tasks = Task.tagged_with(params[:tag])
+    else
+      sleep 1
+      @incomplete_tasks = Task.where(complete: false)
+      @complete_tasks = Task.where(complete: true)
+      @tasks = Task.find(:all, :order => "finish_by")
+    end
   end
 
   def show
@@ -50,6 +54,23 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url }
       format.js
+    end
+  end
+
+  def autocomplete
+    @tasks = Task.all
+
+    render json: @tasks.map(&:tag_list).uniq!.join(', ')
+  end
+
+  def complete
+    if params[:tag]
+      @tasks = Task.tagged_with(params[:tag])
+    else
+      sleep 1
+      @incomplete_tasks = Task.where(complete: false)
+      @complete_tasks = Task.where(complete: true)
+      @tasks = Task.find(:all, :order => "finish_by")
     end
   end
 end

@@ -1,24 +1,40 @@
 <h1>Check List</h1>
 
-<%= link_to "New Task", new_task_path, id: "new_link", remote: true %>
-
-<h2>Incomplete Tasks</h2>
-<div class="tasks" id="incomplete_tasks">
-  <%= render @incomplete_tasks %>
+<div id="tag_cloud">
+  <% tag_cloud Task.tag_counts, %w{s m l} do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
 </div>
+<hr /><br/>
 
-<h2>Complete Tasks</h2>
-<div class="tasks" id="complete_tasks">
-  <%= render @complete_tasks %>
-</div>
+<%= link_to 'Home', tasks_path %>|
+<%= link_to "New Task", new_task_path, id: "new_link", remote: true %> |
 
-<hr />
+<% if @incomplete_tasks.present? %>
+  <h2>Incomplete Tasks</h2>
+    <div class="tasks" id="incomplete_tasks">
+      <%= render @incomplete_tasks %>
+    </div>
+<% end %>
+
+<% if @complete_tasks.present? %>
+  <h2>Complete Tasks</h2>
+    <div class="tasks" id="complete_tasks">
+      <%= render @complete_tasks %>
+    </div>
+<% end %>
+
+<br/>
+<h1>List of Tasks</h1>
+<br/>
 
 <% @tasks.each do |task| %>
-<div>
-  <%= link_to task.name, task %>(<%= task.finish_by.strftime("%d %B %Y") %>)<br/>
-  <i>(<%= truncate(task.content, :length => 50, :separator => ' ') %>)</i>
-
-</div>
-
+  <% if task.complete == false %>
+    <div>
+      <h2><%= link_to task.name, task %> (<%= task.finish_by.strftime("%d %B %Y") %>)</h2><br/>
+      <i>(<%= truncate(task.content, :length => 50, :separator => ' ') %>)</i>
+      <p>Tags: <%= raw task.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
+      <hr />
+    </div>
+  <% end %>
 <% end %>

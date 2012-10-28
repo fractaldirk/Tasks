@@ -1,0 +1,12 @@
+jQuery.fn.submitOnCheck = ->
+   @find('input[type=submit]').remove()
+   @find('input[type=checkbox]').click ->
+   $(this).parent('form').submit()
+   this
+
+jQuery ->
+  $('.edit_task').submitOnCheck()
+
+jQuery ->
+  $('#product_category_name').autocomplete
+    source: $('#product_category_name').data('autocomplete-source')

@@ -10,7 +10,11 @@ $(function() {
   $('.edit_task').submitOnCheck();
 });
 
-
+jQuery(function() {
+  return $('#task_complete').autocomplete({
+    source: $('#task_complete').data('autocomplete-source')
+  });
+});
 
 // CoffeeScript Version:
 //

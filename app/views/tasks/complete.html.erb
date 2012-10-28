@@ -1,0 +1,15 @@
+<h1>Completed tasks</h1>
+
+<%= link_to 'Home', tasks_path %><br/>
+<hr />
+
+<% @tasks.each do |task| %>
+  <% if task.complete == true %>
+    <div>
+      <h2><%= link_to task.name, task %> (<%= task.finish_by.strftime("%d %B %Y") %>)</h2><br/>
+      <i>(<%= truncate(task.content, :length => 50, :separator => ' ') %>)</i>
+      <p>Tags: <%= raw task.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
+      <hr />
+    </div>
+  <% end %>
+<% end %>

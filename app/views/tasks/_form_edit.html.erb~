@@ -1,10 +1,15 @@
 <%= form_for @task do |f| %>
-<div class="text_field">
+<div class="field">
   <%= f.label :name, "Name:" %><br/>
   <%= f.text_field :name %>
 </div>
 
-<div class="text_field">
+<div class="field">
+  <%= f.label :tag_list, "Tags (separated by commas)" %><br/>
+  <%= f.text_field :tag_list, :id => "task_complete", :placeholder => 'Please use autocomplete where possible, thanks.', data: { autocomplete_source: tasks_autocompletedos_path } %>
+</div>
+
+<div class="field">
   <%= f.label :finish_by, "Should be finished by:" %><br/>
   <%= f.date_select(:finish_by, :order => [:day, :month, :year]) %>
 </div>
@@ -15,6 +20,6 @@
 </div>
 
 <div class="actions">
-  <%= link_to_submit "Update", :name => "hard_button" %>
+  <%= link_to_submit "Update" %>
 </div>
 <% end %>
